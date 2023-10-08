@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Services\" />
+    <None Remove="Services\ConnersSelfEvaluationServiceNS\" />
+    <None Remove="Services\ClipboardServiceNS\" />
+    <None Remove="Services\ConnersSelfEvaluationServiceNS\Indexes\Adhd\" />
+    <None Remove="Services\ConnersSelfEvaluationServiceNS\Indexes\Disorder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\ClipboardServiceNS\" />
+    <Folder Include="Services\ConnersSelfEvaluationServiceNS\Indexes\Adhd\" />
+    <Folder Include="Services\ConnersSelfEvaluationServiceNS\Indexes\Disorder\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "C#: PsychologicalTesting [Default Configuration]",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/PsychologicalTesting/PsychologicalTesting.csproj"
+        }
+    ]
+}
