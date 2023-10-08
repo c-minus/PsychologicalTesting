@@ -85,6 +85,9 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 			subject.AdhdConners3Index = _adhdConners3Calculator.Calculate(subject.Questions);
 			CloneAndAddToSnapshot(subject, State.AdhdConners3Index);
 
+			subject.ScreeningIndex = GetScreeningIndex(subject.Questions);
+			CloneAndAddToSnapshot(subject, State.ScreeningIndex);
+
 			return snapshot;
 		}
 		catch (System.Exception ex)
@@ -150,6 +153,33 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 		};
 
 		return deteriorationIndex;
+	}
+
+	private ScreeningIndex GetScreeningIndex(List<Question> questions)
+	{
+		var AnxietyIndex = new AnxietyIndex
+		{
+			IrritableScore = questions.Where(q => q.Id == 29).FirstOrDefault().Score,
+			NervousOrAgitatedScore = questions.Where(q => q.Id == 2).FirstOrDefault().Score,
+			WorriedControlScore = questions.Where(q => q.Id == 46).FirstOrDefault().Score,
+			WorriedScore = questions.Where(q => q.Id == 90).FirstOrDefault().Score
+		};
+
+		var DepresionIndex = new DepresionIndex
+		{
+			LostOfInterestOrPleasureScore = questions.Where(q => q.Id == 44).FirstOrDefault().Score,
+			SadnessOrIrritableScore = questions.Where(q => q.Id == 68).FirstOrDefault().Score,
+			TiredOrLowEnergyScore = questions.Where(q => q.Id == 80).FirstOrDefault().Score,
+			UselessnessScore = questions.Where(q => q.Id == 36).FirstOrDefault().Score
+		};
+
+		var screeningIndex = new ScreeningIndex
+		{
+			AnxietyIndex = AnxietyIndex,
+			DepresionIndex = DepresionIndex
+		};
+
+		return screeningIndex;
 	}
 
 	private void CloneAndAddToSnapshot(Subject subject, State state)

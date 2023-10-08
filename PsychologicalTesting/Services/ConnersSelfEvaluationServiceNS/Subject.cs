@@ -11,7 +11,7 @@ namespace Services.ConnersSelfEvaluationServiceNS
     {
         public string? Id { get; set; }
         public string? Name { get; set; }
-        public State? CurrentState { get; set; }
+        public State CurrentState { get; set; }
         public string? CurrentStateName => Enum.GetName(typeof(State), CurrentState);
         public int Age { get; set; }
         public string? IdentifyAs { get; set; }
@@ -20,8 +20,9 @@ namespace Services.ConnersSelfEvaluationServiceNS
         public PiAndNiIndex? PiAndNiIndex { get; set; }
         public AdhdIndex? AdhdIndex { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public DisorderIndex DisorderIndex { get; set; }
-        public DeteriorationIndex DeteriorationIndex { get; set; }
-        public AdhdConners3Index AdhdConners3Index { get; set; }
+        public DisorderIndex? DisorderIndex { get; set; }
+        public DeteriorationIndex? DeteriorationIndex { get; set; }
+        public AdhdConners3Index? AdhdConners3Index { get; set; }
+        public ScreeningIndex? ScreeningIndex { get; set; }
     }
 }
