@@ -9,9 +9,11 @@
 
 <PageTitle>Upload</PageTitle>
 
-@if (snapshot == null)
+@if (_snapshot == null)
 {
-    <p><em>Loading...</em></p>
+    <p>
+        <em>Loading...</em>
+    </p>
 }
 else
 {
@@ -20,24 +22,28 @@ else
         <span class="oi oi-clipboard oi-lg">Copy to clipboard</span>
     </div>
     <pre>
-        @(JsonSerializer.Serialize(snapshot.States.LastOrDefault(), new JsonSerializerOptions() { WriteIndented = true }))
+        @if (_snapshot.States != null)
+        {
+            @JsonSerializer.Serialize(_snapshot.States.LastOrDefault(), new JsonSerializerOptions() { WriteIndented = true })
+        }
     </pre>
 }
 
 @code {
-    private Snapshot? snapshot;
+    private Snapshot? _snapshot;
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
     {
-        snapshot = ConnerService.Init();
+        _snapshot = ConnerService.Init();
+        return Task.CompletedTask;
     }
 
     private void CopyToClipboard()
     {
-        var json = JsonSerializer.Serialize(snapshot.States.LastOrDefault(), new JsonSerializerOptions()
-            {
-                WriteIndented = true
-            });
+        var json = JsonSerializer.Serialize(_snapshot?.States?.LastOrDefault(), new JsonSerializerOptions()
+        {
+            WriteIndented = true
+        });
 
         ClipboardService.CopyToClipboard(json);
     }

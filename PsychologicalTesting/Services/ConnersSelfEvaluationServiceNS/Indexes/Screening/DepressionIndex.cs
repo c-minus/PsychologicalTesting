@@ -1,6 +1,6 @@
 ﻿namespace PsychologicalTesting;
 
-public class DepresionIndex
+public class DepressionIndex
 {
     public byte UselessnessScore { get; set; }
     public byte LostOfInterestOrPleasureScore { get; set; }

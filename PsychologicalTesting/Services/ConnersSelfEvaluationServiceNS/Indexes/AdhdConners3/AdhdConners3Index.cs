@@ -1,10 +1,10 @@
-﻿namespace PsychologicalTesting;
+﻿namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.AdhdConners3;
 
 public class AdhdConners3Index
 {
-    public List<KeyValuePair<byte, byte>> Items { get; set; }
+    public List<KeyValuePair<byte, byte>>? Items { get; set; }
 
-    public byte TotalScore => (byte)Items.Sum(x => x.Value);
+    public byte TotalScore => (byte)Items!.Sum(x => x.Value);
 
     public byte Probability
     {

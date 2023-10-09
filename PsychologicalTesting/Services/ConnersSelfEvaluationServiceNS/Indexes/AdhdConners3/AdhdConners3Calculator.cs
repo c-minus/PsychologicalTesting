@@ -1,4 +1,5 @@
 ﻿using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.AdhdConners3;
 
 namespace PsychologicalTesting;
 
@@ -17,7 +18,7 @@ public class AdhdConners3Calculator : IAdhdConners3Calculator
 
         foreach (var rule in _rules)
         {
-            foreach (var id in rule.Ids)
+            foreach (var id in rule.Ids!)
             {
                 var question = questions.FirstOrDefault(x => x.Id == id);
 

@@ -35,8 +35,8 @@ namespace PsychologicalTesting.Tests.Services.ConnersSelfEvaluationServiceNS.Ind
             var result = _calculator.Calculate(questions);
 
             // Assert
-            Assert.AreEqual(6, result.Pi);
-            Assert.AreEqual(9, result.Ni);
+            Assert.That(result.Pi, Is.EqualTo(6));
+            Assert.That(result.Ni, Is.EqualTo(9));
         }
     }
 }

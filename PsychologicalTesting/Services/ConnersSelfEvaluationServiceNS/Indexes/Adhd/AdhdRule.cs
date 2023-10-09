@@ -1,4 +1,4 @@
-namespace Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
+namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
 
 public class AdhdRule
 {
@@ -10,6 +10,6 @@ public class AdhdRule
 
     public bool IsMatch()
     {
-        return Predicate(Value1, Value2);
+        return Predicate!(Value1, Value2);
     }
 }

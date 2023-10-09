@@ -9,7 +9,7 @@
 
 		public bool IsMatch()
 		{
-			return Predicate(Value);
+			return Predicate != null && Predicate(Value);
 		}
 	}
 }

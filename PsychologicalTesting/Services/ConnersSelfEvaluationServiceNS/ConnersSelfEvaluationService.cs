@@ -2,6 +2,7 @@
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Disorder;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.PiAndNi;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Screening;
 using Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
 using Services.ConnersSelfEvaluationServiceNS.Indexes;
@@ -164,7 +165,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 			WorriedScore = questions.FirstOrDefault(q => q.Id == 90)!.Score
 		};
 
-		var depresionIndex = new DepresionIndex
+		var depressionIndex = new DepressionIndex
 		{
 			LostOfInterestOrPleasureScore = questions.FirstOrDefault(q => q.Id == 44)!.Score,
 			SadnessOrIrritableScore = questions.FirstOrDefault(q => q.Id == 68)!.Score,
@@ -175,7 +176,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 		var screeningIndex = new ScreeningIndex
 		{
 			AnxietyIndex = anxietyIndex,
-			DepresionIndex = depresionIndex
+			DepressionIndex = depressionIndex
 		};
 
 		return screeningIndex;

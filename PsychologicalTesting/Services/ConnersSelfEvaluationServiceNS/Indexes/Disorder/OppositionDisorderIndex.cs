@@ -18,59 +18,58 @@ namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.D
 			yield return new DisorderRule()
 			{
 				Name = "A1",
-				Value = questions.Where(x => x.Id == 67).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 67)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A2",
-				Value = questions.Where(x => x.Id == 24).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 24)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A3",
-				Value = questions.Where(x => x.Id == 1).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 1)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A4",
-				Value = questions.Where(x => x.Id == 3).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 3)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A5",
-				Value = questions.Where(x => x.Id == 62).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 62)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A6",
-				Value = questions.Where(x => x.Id == 74).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 74)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A7",
-				Value = questions.Where(x => x.Id == 87).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 87)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 
 			yield return new DisorderRule()
 			{
 				Name = "A8",
-				Value = questions.Where(x => x.Id == 94).FirstOrDefault().Score,
+				Value = questions.FirstOrDefault(x => x.Id == 94)!.Score,
 				Predicate = (value) => value == 2 || value == 3
 			};
 		}
 	}
 }
-
