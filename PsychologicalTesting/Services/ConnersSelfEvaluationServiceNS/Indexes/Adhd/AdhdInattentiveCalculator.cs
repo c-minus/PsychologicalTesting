@@ -2,6 +2,10 @@
 
 public class AdhdInattentiveCalculator : IAdhdInattentiveIndex
 {
+	public AdhdInattentiveCalculator()
+	{
+		
+	}
 	public byte Calculate(List<Question> questions)
 	{
 		var rules = GetRules(questions);
@@ -11,7 +15,7 @@ public class AdhdInattentiveCalculator : IAdhdInattentiveIndex
 		return (byte)count;
 	}
 
-	private IEnumerable<AdhdRule> GetRules(List<Question> questions)
+	public IEnumerable<AdhdRule> GetRules(List<Question> questions)
 	{
 
 		yield return new AdhdRule()
