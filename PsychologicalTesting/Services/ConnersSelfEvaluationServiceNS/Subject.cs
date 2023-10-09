@@ -24,5 +24,6 @@ namespace Services.ConnersSelfEvaluationServiceNS
         public DeteriorationIndex? DeteriorationIndex { get; set; }
         public AdhdConners3Index? AdhdConners3Index { get; set; }
         public ScreeningIndex? ScreeningIndex { get; set; }
+        public SevereBehaviorIndex SevereBehaviorIndex { get; set; }
     }
 }

@@ -16,11 +16,11 @@
 else
 {
     <button class="btn btn-primary" @onclick="CopyToClipboard">Copy</button>
-    <div @onclick ="CopyToClipboard">
+    <div @onclick="CopyToClipboard">
         <span class="oi oi-clipboard oi-lg">Copy to clipboard</span>
     </div>
     <pre>
-        @(JsonSerializer.Serialize(snapshot.States, new JsonSerializerOptions() { WriteIndented = true }))
+        @(JsonSerializer.Serialize(snapshot.States.LastOrDefault(), new JsonSerializerOptions() { WriteIndented = true }))
     </pre>
 }
 
@@ -34,7 +34,7 @@ else
 
     private void CopyToClipboard()
     {
-        var json = JsonSerializer.Serialize(snapshot.States, new JsonSerializerOptions()
+        var json = JsonSerializer.Serialize(snapshot.States.LastOrDefault(), new JsonSerializerOptions()
             {
                 WriteIndented = true
             });

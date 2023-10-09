@@ -11,5 +11,6 @@ public enum State
     DisorderIndex,
     DeteriorationIndex,
     AdhdConners3Index,
-    ScreeningIndex
+    ScreeningIndex,
+    SevereBehaviorIndex
 }

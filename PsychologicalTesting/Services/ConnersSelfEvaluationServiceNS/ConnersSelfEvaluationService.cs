@@ -88,6 +88,9 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 			subject.ScreeningIndex = GetScreeningIndex(subject.Questions);
 			CloneAndAddToSnapshot(subject, State.ScreeningIndex);
 
+			subject.SevereBehaviorIndex = GetSevereBehaviorIndex(subject.Questions);
+			CloneAndAddToSnapshot(subject, State.SevereBehaviorIndex);
+
 			return snapshot;
 		}
 		catch (System.Exception ex)
@@ -180,6 +183,19 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 		};
 
 		return screeningIndex;
+	}
+
+	private SevereBehaviorIndex GetSevereBehaviorIndex(List<Question> questions)
+	{
+		return new SevereBehaviorIndex
+		{
+			AnimalCrueltyScore = questions.Where(q => q.Id == 47).FirstOrDefault().Score,
+			BreakingAndEnteringScore = questions.Where(q => q.Id == 78).FirstOrDefault().Score,
+			ConfrontationalTheftScore = questions.Where(q => q.Id == 13).FirstOrDefault().Score,
+			FireStarterScore = questions.Where(q => q.Id == 72).FirstOrDefault().Score,
+			PoliceProblemsScore = questions.Where(q => q.Id == 22).FirstOrDefault().Score,
+			UsingGunsScore = questions.Where(q => q.Id == 59).FirstOrDefault().Score
+		};
 	}
 
 	private void CloneAndAddToSnapshot(Subject subject, State state)
