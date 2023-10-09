@@ -1,3 +1,5 @@
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
+
 namespace Services.ConnersSelfEvaluationServiceNS
 {
     public class CategoryTypeFactory : ICategoryTypeFactory

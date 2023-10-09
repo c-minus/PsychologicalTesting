@@ -2,7 +2,7 @@
 {
     public interface IConnersSelfEvaluationService
     {
-        public Snapshot Init();
+        public Snapshot? Init();
     }
 }
 

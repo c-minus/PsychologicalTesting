@@ -1,8 +1,7 @@
-namespace Services.ConnersSelfEvaluationServiceNS
+namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
+
+public class CategoryMap
 {
-    public class CategoryMap
-    {
-        public byte Id { get; set; }
-        public IEnumerable<string> Categories { get; set; }
-    }
+    public byte Id { get; set; }
+    public IEnumerable<string> Categories { get; set; }
 }
