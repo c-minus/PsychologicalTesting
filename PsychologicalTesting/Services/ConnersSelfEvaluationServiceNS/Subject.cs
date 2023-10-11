@@ -14,7 +14,7 @@ public class Subject
     public State CurrentState { get; set; }
     public string? CurrentStateName => Enum.GetName(typeof(State), CurrentState);
     public int Age { get; set; }
-    public string? IdentifyAs { get; set; }
+    public IdentifyAs? IdentifyAs { get; set; }
     public List<Question>? Questions { get; set; }
     public InconsistencyIndex? InconsistencyIndex { get; set; }
     public PiAndNiIndex? PiAndNiIndex { get; set; }

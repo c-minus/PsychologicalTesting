@@ -12,7 +12,7 @@ namespace Services.ConnersSelfEvaluationServiceNS.Data
                 Id = "1",
                 Name = "John Doe",
                 Age = 30,
-                IdentifyAs = "Helicopter",
+                IdentifyAs = IdentifyAs.Male,
                 Questions = GetQuestions().ToList(),
                 CreatedAt = DateTime.Now
             };

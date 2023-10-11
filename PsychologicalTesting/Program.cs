@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using PsychologicalTesting;
-using PsychologicalTesting.Services;
 using PsychologicalTesting.Services.ClipboardServiceNS;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.FileManipulator;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.AdhdConners3;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Disorder;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.PiAndNi;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
 using Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.Data;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
@@ -29,6 +31,8 @@ builder.Services.AddSingleton<IAdhdInattentiveIndex, AdhdInattentiveCalculator>(
 builder.Services.AddSingleton<IBehaviorDisorderIndex, BehaviorDisorderIndex>();
 builder.Services.AddSingleton<IOppositionDisorderIndex, OppositionDisorderIndex>();
 builder.Services.AddSingleton<IAdhdConners3Calculator, AdhdConners3Calculator>();
+builder.Services.AddSingleton<IProfileFactory, ProfileFactory>();
+builder.Services.AddSingleton<IFileManipulatorService, FileManipulatorService>();
 
 await builder.Build().RunAsync();
 

@@ -1,11 +1,13 @@
 ﻿@using Services.ConnersSelfEvaluationServiceNS
 @using Services.ClipboardServiceNS
 @using System.Text.Json
+@using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.FileManipulator
 
 @page "/fetchdata"
 @inject HttpClient Http
 @inject IConnersSelfEvaluationService ConnerService
 @inject IClipboardService ClipboardService
+@inject IFileManipulatorService FileManipulatorService
 
 <PageTitle>Upload</PageTitle>
 
@@ -17,7 +19,12 @@
 }
 else
 {
-    <button class="btn btn-primary" @onclick="CopyToClipboard">Copy</button>
+    <p>
+        <label>
+            <InputFile OnChange="@LoadFile" />
+        </label>
+    </p>
+
     <div @onclick="CopyToClipboard">
         <span class="oi oi-clipboard oi-lg">Copy to clipboard</span>
     </div>
@@ -31,6 +38,13 @@ else
 
 @code {
     private Snapshot? _snapshot;
+
+    private  void LoadFile(InputFileChangeEventArgs e)
+    {
+        var files = e.GetMultipleFiles();
+        var file = files.FirstOrDefault();
+        FileManipulatorService.ReadFromStream(file);
+    }
 
     protected override Task OnInitializedAsync()
     {

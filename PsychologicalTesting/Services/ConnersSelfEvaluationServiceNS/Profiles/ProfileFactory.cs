@@ -1,17 +1,19 @@
+using System.Collections;
+
 namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
 
-public class ProfileFactory
+public class ProfileFactory : IProfileFactory
 {
-    private readonly byte _age;
+    private readonly IdentifyAs _identifyAs;
 
-    public ProfileFactory(byte age)
+    public ProfileFactory(IdentifyAs identifyAs)
     {
-        _age = age;
+        _identifyAs = identifyAs;
     }
 
     public Profile Create()
     {
-        return GetMaleProfile();
+        return _identifyAs is IdentifyAs.Female ? GetFemaleProfile() : GetMaleProfile();
     }
 
     private Profile GetMaleProfile()
@@ -19,13 +21,29 @@ public class ProfileFactory
         var profile = new Profile
         {
             Name = "Male",
-            Categories = GetCategories().ToList()
+            Categories = GetMaleCategories().ToList()
+        };
+
+        return profile;
+    }
+    
+    private Profile GetFemaleProfile()
+    {
+        var profile = new Profile
+        {
+            Name = "Female",
+            Categories = GetFemaleCategories().ToList()
         };
 
         return profile;
     }
 
-    private IEnumerable<ProfileCategory> GetCategories()
+    private IEnumerable<ProfileCategory> GetFemaleCategories()
+    {
+        return Enumerable.Empty<ProfileCategory>();
+    }
+
+    private IEnumerable<ProfileCategory> GetMaleCategories()
     {
         yield return new()
         {
@@ -69,9 +87,277 @@ public class ProfileFactory
             Name = "Oppositional Defiant Disorder",
             AgeSegments = GetOppositionalDefiantDisorderAgeSegments().ToList()
         };
+        yield return new()
+        {
+            Id = "AG",
+            Name = "Aggression",
+            AgeSegments = GetAggresionAgeSegments().ToList()
+        };
+        yield return new()
+        {
+            Id = "FR",
+            Name = "Family Relations",
+            AgeSegments = GetFamilyRelationsAgeSegments().ToList()
+        };
     }
 
-    private  IEnumerable<AgeSegment> GetOppositionalDefiantDisorderAgeSegments()
+    private IEnumerable<AgeSegment> GetFamilyRelationsAgeSegments()
+    {
+        yield return new(new byte[] { 8, 9, 10 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 42),
+                new(1, 44),
+                new(2, 47),
+                new(3, 59),
+                new(4, 52),
+                new(5, 54),
+                new(6, 56),
+                new(7, 59),
+                new(8, 61),
+                new(9, 64),
+                new(10, 66),
+                new(11, 68),
+                new(12, 71),
+                new(13, 73),
+                new(14, 76),
+                new(15, 78),
+                new(16, 80),
+                new(17, 83),
+                new(18, 85),
+                new(19, 87),
+                new(20, 90)
+            }
+        };
+        yield return new(new byte[] { 11, 12 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 42),
+                new(1, 44),
+                new(2, 47),
+                new(3, 49),
+                new(4, 52),
+                new(5, 54),
+                new(6, 57),
+                new(7, 59),
+                new(8, 62),
+                new(9, 64),
+                new(10, 67),
+                new(11, 69),
+                new(12, 72),
+                new(13, 74),
+                new(14, 77),
+                new(15, 79),
+                new(16, 82),
+                new(17, 84),
+                new(18, 87),
+                new(19, 89),
+                new(20, 90)
+            }
+        };
+        yield return new(new byte[] { 13, 14 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 42),
+                new(1, 44),
+                new(2, 47),
+                new(3, 49),
+                new(4, 52),
+                new(5, 54),
+                new(6, 57),
+                new(7, 59),
+                new(8, 62),
+                new(9, 65),
+                new(10, 67),
+                new(11, 70),
+                new(12, 72),
+                new(13, 75),
+                new(14, 77),
+                new(15, 80),
+                new(16, 82),
+                new(17, 85),
+                new(18, 88),
+                new(19, 90)
+            }
+        };
+        yield return new(new byte[] { 15, 16 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 41),
+                new(1, 44),
+                new(2, 46),
+                new(3, 49),
+                new(4, 51),
+                new(5, 54),
+                new(6, 56),
+                new(7, 59),
+                new(8, 61),
+                new(9, 64),
+                new(10, 66),
+                new(11, 69),
+                new(12, 71),
+                new(13, 74),
+                new(14, 76),
+                new(15, 79),
+                new(16, 81),
+                new(17, 84),
+                new(18, 86),
+                new(19, 89),
+                new(20, 90)
+            }
+        };
+        yield return new(new byte[] { 17, 18 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 40),
+                new(1, 43),
+                new(2, 45),
+                new(3, 48),
+                new(4, 50),
+                new(5, 52),
+                new(6, 55),
+                new(7, 57),
+                new(8, 60),
+                new(9, 62),
+                new(10, 64),
+                new(11, 67),
+                new(12, 69),
+                new(13, 71),
+                new(14, 74),
+                new(15, 76),
+                new(16, 79),
+                new(17, 81),
+                new(18, 83),
+                new(19, 86),
+                new(20, 88),
+                new(21, 90)
+            }
+        };
+    }
+
+    private IEnumerable<AgeSegment> GetAggresionAgeSegments()
+    {
+        yield return new(new byte[] { 8, 9, 10 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 43),
+                new(1, 47),
+                new(2, 51),
+                new(3, 55),
+                new(4, 59),
+                new(5, 63),
+                new(6, 67),
+                new(7, 71),
+                new(8, 75),
+                new(9, 79),
+                new(10, 83),
+                new(11, 87),
+                new(12, 90)
+            }
+        };
+        yield return new(new byte[] { 11, 12 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 42),
+                new(1, 47),
+                new(2, 51),
+                new(3, 55),
+                new(4, 59),
+                new(5, 64),
+                new(6, 68),
+                new(7, 72),
+                new(8, 76),
+                new(9, 81),
+                new(10, 85),
+                new(11, 89),
+                new(12, 90)
+            }
+        };
+        yield return new(new byte[] { 13, 14 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 43),
+                new(1, 46),
+                new(2, 50),
+                new(3, 53),
+                new(4, 57),
+                new(5, 60),
+                new(6, 64),
+                new(7, 67),
+                new(8, 71),
+                new(9, 74),
+                new(10, 78),
+                new(11, 81),
+                new(12, 85),
+                new(13, 87),
+                new(14, 90)
+            }
+        };
+        yield return new(new byte[] { 15, 16 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 43),
+                new(1, 45),
+                new(2, 48),
+                new(3, 51),
+                new(4, 53),
+                new(5, 56),
+                new(6, 59),
+                new(7, 61),
+                new(8, 64),
+                new(9, 67),
+                new(10, 69),
+                new(11, 72),
+                new(12, 75),
+                new(13, 77),
+                new(14, 80),
+                new(15, 82),
+                new(16, 85),
+                new(17, 88),
+                new(18, 90)
+            }
+        };
+        yield return new(new byte[] { 17, 18 })
+        {
+            Mappings = new List<KeyValuePair<byte, byte>>
+            {
+                new(0, 42),
+                new(1, 45),
+                new(2, 47),
+                new(3, 49),
+                new(4, 51),
+                new(5, 53),
+                new(6, 55),
+                new(7, 58),
+                new(8, 60),
+                new(9, 62),
+                new(10, 64),
+                new(11, 66),
+                new(12, 68),
+                new(13, 70),
+                new(14, 73),
+                new(15, 75),
+                new(16, 77),
+                new(17, 79),
+                new(18, 81),
+                new(19, 83),
+                new(20, 86),
+                new(21, 88),
+                new(22, 90)
+            }
+        };
+    }
+
+    private IEnumerable<AgeSegment> GetOppositionalDefiantDisorderAgeSegments()
     {
         yield return new(new byte[] { 8, 9, 10 })
         {
@@ -302,7 +588,7 @@ public class ProfileFactory
 
     private IEnumerable<AgeSegment> GetAdhdHyperImpulsAgeSegments()
     {
-         yield return new(new byte[] { 8, 9, 10 })
+        yield return new(new byte[] { 8, 9, 10 })
         {
             Mappings = new List<KeyValuePair<byte, byte>>
             {
@@ -311,7 +597,7 @@ public class ProfileFactory
                 new(2, 42),
                 new(3, 44),
                 new(4, 46),
-                new(5, 48), 
+                new(5, 48),
                 new(6, 50),
                 new(7, 52),
                 new(8, 53),
@@ -361,7 +647,7 @@ public class ProfileFactory
                 new(18, 72),
                 new(19, 74),
                 new(20, 76),
-                new(21, 78),    
+                new(21, 78),
                 new(22, 80),
                 new(23, 82),
                 new(24, 84),
@@ -786,7 +1072,7 @@ public class ProfileFactory
 
     private IEnumerable<AgeSegment> GetHyperImpulsAgeSegments()
     {
-         yield return new(new byte[] { 8, 9, 10 })
+        yield return new(new byte[] { 8, 9, 10 })
         {
             Mappings = new List<KeyValuePair<byte, byte>>
             {
