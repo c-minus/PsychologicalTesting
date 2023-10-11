@@ -9,17 +9,23 @@ using Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
 namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
 public class Subject
 {
+    public Subject()
+    {
+        CreatedAt = DateTime.Now;
+    }
+
     public string? Id { get; set; }
     public string? Name { get; set; }
     public State CurrentState { get; set; }
     public string? CurrentStateName => Enum.GetName(typeof(State), CurrentState);
     public int Age { get; set; }
-    public IdentifyAs? IdentifyAs { get; set; }
+    public IdentifyAs? IdentifyAs => (IdentifyAs)IdentifyAsExcelValue;
+    public byte IdentifyAsExcelValue { get; set; }
     public List<Question>? Questions { get; set; }
     public InconsistencyIndex? InconsistencyIndex { get; set; }
     public PiAndNiIndex? PiAndNiIndex { get; set; }
     public AdhdIndex? AdhdIndex { get; set; }
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; }
     public DisorderIndex? DisorderIndex { get; set; }
     public DeteriorationIndex? DeteriorationIndex { get; set; }
     public AdhdConners3Index? AdhdConners3Index { get; set; }

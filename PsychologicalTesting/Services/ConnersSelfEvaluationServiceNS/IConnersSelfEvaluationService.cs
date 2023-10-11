@@ -1,8 +1,10 @@
-﻿namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS
+﻿using Microsoft.AspNetCore.Components.Forms;
+
+namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS
 {
     public interface IConnersSelfEvaluationService
     {
-        public Snapshot? Init();
+        public Task<Snapshot?> InitAsync(IBrowserFile file);
     }
 }
 

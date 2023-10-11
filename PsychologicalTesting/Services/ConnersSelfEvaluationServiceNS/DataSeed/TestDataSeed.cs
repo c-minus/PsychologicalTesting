@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.Forms;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
 
@@ -5,16 +6,20 @@ namespace Services.ConnersSelfEvaluationServiceNS.Data
 {
     public class TestDataSeed : IDataSeed
     {
-        public Subject Get()
+        public async Task<Subject> GetAsync(IBrowserFile file)
+        {
+           return await Task.FromResult(GetSubject()); 
+        }
+
+        private Subject GetSubject()
         {
             return new Subject
             {
                 Id = "1",
                 Name = "John Doe",
                 Age = 30,
-                IdentifyAs = IdentifyAs.Male,
-                Questions = GetQuestions().ToList(),
-                CreatedAt = DateTime.Now
+                IdentifyAsExcelValue = 1,
+                Questions = GetQuestions().ToList()
             };
         }
 
