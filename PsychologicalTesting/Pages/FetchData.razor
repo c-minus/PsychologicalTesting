@@ -31,7 +31,7 @@
 <pre>
     @if (_showResults)
     {
-        @JsonSerializer.Serialize(_snapshot.States.LastOrDefault(), new JsonSerializerOptions() { WriteIndented = true })
+        @JsonSerializer.Serialize(_snapshot?.States?.LastOrDefault(), new JsonSerializerOptions() { WriteIndented = true })
     }
 </pre>
 @code {

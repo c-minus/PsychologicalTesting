@@ -4,6 +4,7 @@ using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Adhd;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Disorder;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.PiAndNi;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Screening;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
 using Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
 using Services.ConnersSelfEvaluationServiceNS.Indexes;
@@ -23,6 +24,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
     private readonly IBehaviorDisorderIndex _behaviorDisorderIndex;
     private readonly IOppositionDisorderIndex _oppositionDisorderIndex;
     private readonly IAdhdConners3Calculator _adhdConners3Calculator;
+    private readonly IProfileFactory _profileFactory;
 
     private readonly Snapshot? _snapshot = new();
 
@@ -37,19 +39,26 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
         IAdhdInattentiveIndex adhdInattentiveIndex,
         IBehaviorDisorderIndex behaviorDisorderIndex,
         IOppositionDisorderIndex oppositionDisorderIndex,
-        IAdhdConners3Calculator adhdConners3Calculator
+        IAdhdConners3Calculator adhdConners3Calculator,
+        IProfileFactory profileFactory
     )
     {
         _data = data ?? throw new ArgumentNullException(nameof(data));
         _scoringTypeFactory = scoringTypeFactory ?? throw new ArgumentNullException(nameof(scoringTypeFactory));
         _categoryFactory = categoryFactory ?? throw new ArgumentNullException(nameof(categoryFactory));
-        _inconsistencyIndexCalculator = inconsistencyIndexCalculator ?? throw new ArgumentNullException(nameof(inconsistencyIndexCalculator));
-        _piAndNiIndexCalculator = piAndNiIndexCalculator ?? throw new ArgumentNullException(nameof(piAndNiIndexCalculator));
+        _inconsistencyIndexCalculator = inconsistencyIndexCalculator ??
+                                        throw new ArgumentNullException(nameof(inconsistencyIndexCalculator));
+        _piAndNiIndexCalculator =
+            piAndNiIndexCalculator ?? throw new ArgumentNullException(nameof(piAndNiIndexCalculator));
         _adhdHyperActiveIndex = adhdHyperActiveIndex ?? throw new ArgumentNullException(nameof(adhdHyperActiveIndex));
         _adhdInattentiveIndex = adhdInattentiveIndex ?? throw new ArgumentNullException(nameof(adhdInattentiveIndex));
-        _behaviorDisorderIndex = behaviorDisorderIndex ?? throw new ArgumentNullException(nameof(behaviorDisorderIndex));
-        _oppositionDisorderIndex = oppositionDisorderIndex ?? throw new ArgumentNullException(nameof(oppositionDisorderIndex));
-        _adhdConners3Calculator = adhdConners3Calculator ?? throw new ArgumentNullException(nameof(adhdConners3Calculator));
+        _behaviorDisorderIndex =
+            behaviorDisorderIndex ?? throw new ArgumentNullException(nameof(behaviorDisorderIndex));
+        _oppositionDisorderIndex =
+            oppositionDisorderIndex ?? throw new ArgumentNullException(nameof(oppositionDisorderIndex));
+        _adhdConners3Calculator =
+            adhdConners3Calculator ?? throw new ArgumentNullException(nameof(adhdConners3Calculator));
+        _profileFactory = profileFactory ?? throw new ArgumentNullException(nameof(profileFactory));
     }
 
     public async Task<Snapshot?> InitAsync(IBrowserFile file)
@@ -92,11 +101,14 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
             subject.SevereBehaviorIndex = GetSevereBehaviorIndex(subject.Questions!);
             CloneAndAddToSnapshot(subject, State.SevereBehaviorIndex);
 
+            subject.Profile = _profileFactory.Create(subject.GenderInternal, subject.Age);
+            CloneAndAddToSnapshot(subject, State.Profile);
+
             return _snapshot;
         }
         catch (Exception ex)
         {
-            _snapshot.Exception = ex;
+            _snapshot!.Exception = ex;
 
             return _snapshot;
         }
@@ -122,15 +134,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
     {
         foreach (var question in questions)
         {
-            try
-            {
-                question.Score = Convert.ToByte((question.ScoringType?[question.Answer]).ToString());
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            question.Score = Convert.ToByte((question.ScoringType?[question.Answer]).ToString());
         }
     }
 
@@ -217,5 +221,3 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
         if (cloned != null) _snapshot?.States?.Add(cloned);
     }
 }
-
-

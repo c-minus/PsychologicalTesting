@@ -18,7 +18,7 @@ namespace Services.ConnersSelfEvaluationServiceNS.Data
                 Id = "1",
                 Name = "John Doe",
                 Age = 30,
-                IdentifyAsExcelValue = 1,
+                Gender = "male",
                 Questions = GetQuestions().ToList()
             };
         }

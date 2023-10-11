@@ -4,16 +4,11 @@ namespace PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
 
 public class ProfileFactory : IProfileFactory
 {
-    private readonly IdentifyAs _identifyAs;
-
-    public ProfileFactory(IdentifyAs identifyAs)
+    private byte _age;
+    public Profile Create(IdentifyAs? identifyAs, byte age)
     {
-        _identifyAs = identifyAs;
-    }
-
-    public Profile Create()
-    {
-        return _identifyAs is IdentifyAs.Female ? GetFemaleProfile() : GetMaleProfile();
+        _age = age;
+        return identifyAs is IdentifyAs.Female ? GetFemaleProfile() : GetMaleProfile();
     }
 
     private Profile GetMaleProfile()
@@ -49,55 +44,73 @@ public class ProfileFactory : IProfileFactory
         {
             Id = "IN",
             Name = "Inattention",
-            AgeSegments = GetInattentionAgeSegments().ToList()
+            AgeSegments = GetInattentionAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "HY",
             Name = "Hyperactivity/Impulsivity",
-            AgeSegments = GetHyperImpulsAgeSegments().ToList()
+            AgeSegments = GetHyperImpulsAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "LP",
             Name = "Learning Problems",
-            AgeSegments = GetLearningProblemsAgeSegments().ToList()
+            AgeSegments = GetLearningProblemsAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "AN",
             Name = "ADHD Inadvertently",
-            AgeSegments = GetAdhdInadvertentlyAgeSegments().ToList()
+            AgeSegments = GetAdhdInadvertentlyAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "AH",
             Name = "ADHD Hyperactive/Impulsive",
-            AgeSegments = GetAdhdHyperImpulsAgeSegments().ToList()
+            AgeSegments = GetAdhdHyperImpulsAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "CD",
             Name = "Behavioral Disorder",
-            AgeSegments = GetBehavioralDisorderAgeSegments().ToList()
+            AgeSegments = GetBehavioralDisorderAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "OD",
             Name = "Oppositional Defiant Disorder",
-            AgeSegments = GetOppositionalDefiantDisorderAgeSegments().ToList()
+            AgeSegments = GetOppositionalDefiantDisorderAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "AG",
             Name = "Aggression",
-            AgeSegments = GetAggresionAgeSegments().ToList()
+            AgeSegments = GetAggresionAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
         yield return new()
         {
             Id = "FR",
             Name = "Family Relations",
-            AgeSegments = GetFamilyRelationsAgeSegments().ToList()
+            AgeSegments = GetFamilyRelationsAgeSegments()
+                .Where(a=>a.IsMatch(_age))
+                .ToList()
         };
     }
 
