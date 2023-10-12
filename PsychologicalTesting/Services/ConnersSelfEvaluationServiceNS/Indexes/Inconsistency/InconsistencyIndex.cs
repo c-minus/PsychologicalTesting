@@ -5,7 +5,7 @@ namespace Services.ConnersSelfEvaluationServiceNS.Indexes
         public byte A { get; set; }
         public byte B { get; set; }
 
-        public bool IsProbablyInvalid
+        public bool? IsProbablyInvalid
         {
             get
             {

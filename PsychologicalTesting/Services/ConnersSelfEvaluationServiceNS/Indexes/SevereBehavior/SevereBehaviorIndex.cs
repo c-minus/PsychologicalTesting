@@ -15,4 +15,5 @@ public class SevereBehaviorIndex
     public bool UsingGuns => UsingGunsScore >= 1;
     public bool FireStarter => FireStarterScore >= 1;
     public bool BreakingAndEntering => BreakingAndEnteringScore >= 1;
+    public bool IsSevereBehavior => ConfrontationalTheft || PoliceProblems || AnimalCruelty || UsingGuns || FireStarter || BreakingAndEntering;
 }

@@ -11,4 +11,6 @@ public class DepressionIndex
     public bool LostOfInterestOrPleasure => LostOfInterestOrPleasureScore >= 1;
     public bool SadnessOrIrritable => SadnessOrIrritableScore >= 1;
     public bool TiredOrLowEnergy => TiredOrLowEnergyScore >= 1;
+    
+    public bool IsDepression => Uselessness || LostOfInterestOrPleasure || SadnessOrIrritable || TiredOrLowEnergy;
 }

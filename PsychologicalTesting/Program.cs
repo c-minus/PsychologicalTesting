@@ -9,6 +9,7 @@ using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.AdhdC
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Disorder;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.PiAndNi;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Result;
 using Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.Data;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
@@ -32,6 +33,7 @@ builder.Services.AddSingleton<IBehaviorDisorderIndex, BehaviorDisorderIndex>();
 builder.Services.AddSingleton<IOppositionDisorderIndex, OppositionDisorderIndex>();
 builder.Services.AddSingleton<IAdhdConners3Calculator, AdhdConners3Calculator>();
 builder.Services.AddSingleton<IProfileFactory, ProfileFactory>();
+builder.Services.AddSingleton<IResultCalculator, ResultCalculator>();
 
 await builder.Build().RunAsync();
 

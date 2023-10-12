@@ -11,4 +11,6 @@ public class AnxietyIndex
     public bool Irritable => IrritableScore >= 1;
     public bool WorriedControl => WorriedControlScore >= 1;
     public bool Worried => WorriedScore >= 1;
+    
+    public bool IsAnxiety => NervousOrAgitated || Irritable || WorriedControl || Worried;
 }

@@ -5,6 +5,7 @@ using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Disor
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.PiAndNi;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Indexes.Screening;
 using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Profiles;
+using PsychologicalTesting.Services.ConnersSelfEvaluationServiceNS.Result;
 using Services.ConnersSelfEvaluationServiceNS;
 using Services.ConnersSelfEvaluationServiceNS.DataSeed;
 using Services.ConnersSelfEvaluationServiceNS.Indexes;
@@ -25,6 +26,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
     private readonly IOppositionDisorderIndex _oppositionDisorderIndex;
     private readonly IAdhdConners3Calculator _adhdConners3Calculator;
     private readonly IProfileFactory _profileFactory;
+    private readonly IResultCalculator? _resultCalculator;
 
     private readonly Snapshot? _snapshot = new();
 
@@ -40,7 +42,8 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
         IBehaviorDisorderIndex behaviorDisorderIndex,
         IOppositionDisorderIndex oppositionDisorderIndex,
         IAdhdConners3Calculator adhdConners3Calculator,
-        IProfileFactory profileFactory
+        IProfileFactory profileFactory,
+        IResultCalculator? resultCalculator = null
     )
     {
         _data = data ?? throw new ArgumentNullException(nameof(data));
@@ -59,6 +62,7 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
         _adhdConners3Calculator =
             adhdConners3Calculator ?? throw new ArgumentNullException(nameof(adhdConners3Calculator));
         _profileFactory = profileFactory ?? throw new ArgumentNullException(nameof(profileFactory));
+        _resultCalculator = resultCalculator;
     }
 
     public async Task<Snapshot?> InitAsync(IBrowserFile file)
@@ -103,6 +107,9 @@ public class ConnersSelfEvaluationService : IConnersSelfEvaluationService
 
             subject.Profile = _profileFactory.Create(subject.GenderInternal, subject.Age);
             CloneAndAddToSnapshot(subject, State.Profile);
+
+            subject.Result = _resultCalculator?.Calculate(subject);
+            CloneAndAddToSnapshot(subject, State.Result);
 
             return _snapshot;
         }

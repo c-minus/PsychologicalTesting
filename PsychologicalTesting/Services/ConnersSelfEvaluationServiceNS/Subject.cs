@@ -34,4 +34,5 @@ public class Subject
     public ScreeningIndex? ScreeningIndex { get; set; }
     public SevereBehaviorIndex? SevereBehaviorIndex { get; set; }
     public Profile? Profile { get; set; }
+    public Result.Result? Result { get; set; }
 }
